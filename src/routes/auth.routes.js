@@ -53,7 +53,8 @@ router.get("/facebook",
 router.get("/facebook/callback",
   passport.authenticate("facebook", { failureRedirect: "/" }),
   (req, res) => {
-    res.redirect("http://localhost:1550/dashboard.html?token=" + req.user.token);
+    // res.redirect("http://localhost:1550/dashboard.html?token=" + req.user.token);
+     res.redirect(process.env.FRONTEND_URL + "/dashboard.html?token=" + req.user.token);
   }
 );
 

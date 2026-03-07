@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 });
 app.use("/patient",patientRoutes)
 app.use("/api/patientinfo",patientinfoRoutes)
-app.use("api/patient",patientinfoRoutes)
+app.use("/api/patient",patientinfoRoutes)
 app.use(session({
     secret:"supersecretkey",
     resave: false,
