@@ -25,7 +25,7 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.post("/complete-profile",verifyToken ,completeProfile)
-router.get ("profile",verifyToken,getProfile)
+router.get ("/profile",verifyToken,getProfile)
 
 
 /* GOOGLE */
