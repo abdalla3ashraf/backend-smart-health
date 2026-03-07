@@ -1,0 +1,61 @@
+// const express = require ('express')
+// const router = express.Router()
+// //const{ register } = require("../controllers/auth.controller")
+// const authController = require('../controllers/auth.controller')
+
+
+
+// router.post("/register",authController.register)
+// router.post('/login',authController.login)
+
+
+
+
+
+// module.exports =router;
+
+
+import express from "express";
+import passport from "passport";
+import { register, login ,completeProfile ,} from "../controllers/auth.controller.js";
+import { getProfile } from "../controllers/user.controller.js";
+import { verifyToken } from "../middlewares/auth.middleware.js";
+const router = express.Router();
+
+router.post("/register", register);
+router.post("/login", login);
+router.post("/complete-profile",verifyToken ,completeProfile)
+router.get ("profile",verifyToken,getProfile)
+
+
+/* GOOGLE */
+router.get("/google",
+  //console.log("google route");
+ 
+  passport.authenticate("google",{ scope : ["profile","email"]})
+);
+
+router.get("/google/callback",
+  passport.authenticate("google", { session: false}),
+  (req, res) => {
+    //res.redirect("http://localhost:1550/dashboard.html?token=" + req.user.token);
+    res.json({message: "google login successful",
+      data: req.user
+   })
+  }
+);
+
+/* FACEBOOK */
+router.get("/facebook",
+  passport.authenticate("facebook", { scope: ["email"] })
+);
+
+router.get("/facebook/callback",
+  passport.authenticate("facebook", { failureRedirect: "/" }),
+  (req, res) => {
+    res.redirect("http://localhost:1550/dashboard.html?token=" + req.user.token);
+  }
+);
+
+
+export default router;
