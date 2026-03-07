@@ -22,6 +22,9 @@ app.get("/test",(req,res)=>{
     res.send("ok")
     
 })
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
 app.use("/patient",patientRoutes)
 app.use("/api/patientinfo",patientinfoRoutes)
 app.use("api/patient",patientinfoRoutes)
