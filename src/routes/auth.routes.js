@@ -40,8 +40,10 @@ router.get("/google/callback",
   (req, res) => {
     //res.redirect("http://localhost:1550/dashboard.html?token=" + req.user.token);
     res.json({message: "google login successful",
-      data: req.user
+      data: req.user,
+      token: req.user.token,
    })
+   res.redirect(process.env.FRONTEND_URL + "/dashboard.html?token=" + req.user.token)
   }
 );
 
