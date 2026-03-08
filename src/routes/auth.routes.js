@@ -18,14 +18,14 @@
 import express from "express";
 import passport from "passport";
 import { register, login ,completeProfile ,} from "../controllers/auth.controller.js";
-import { getProfile } from "../controllers/user.controller.js";
+import { getMyProfile } from "../controllers/user.controller.js";
 import { verifyToken } from "../middlewares/auth.middleware.js";
 const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
 router.post("/complete-profile",verifyToken ,completeProfile)
-router.get ("/profile",verifyToken,getProfile)
+router.get ("/my-profile",verifyToken,getMyProfile)
 
 
 /* GOOGLE */

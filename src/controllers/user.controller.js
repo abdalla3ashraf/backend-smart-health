@@ -13,12 +13,12 @@ const getAuthHeader = (req)=> {
   }
 }
 
-export const getProfile = async (req,res)=> {
+export const getMyProfile = async (req,res)=> {
   try{
     //const token = req.headers.authorization.split(" ")[1]
 
      const response= await axios.get(
-       `${DOTNET_API}/Users/profile`,
+       `${DOTNET_API}/Users/my-profile`,
        getAuthHeader(req)
      )
     //   {
@@ -27,10 +27,13 @@ export const getProfile = async (req,res)=> {
     //     }
     //   }
     // )
-    return res.status(200).json(response.data)
+    return res.status(200).json({
+      message:"profile fetched successfully",
+      data:response.data
+    })
   }catch (error) {
     console.log("PROFILE ERROR:",error.response?.data || error.message);
-    return res.status(500).json({message: "Failed to get profile"})
+    return res.status(500).json({message: "Failed to fetch profile"})
   }
 
 }
@@ -118,3 +121,4 @@ export const getWallet = async (req,res)=> {
   }
 
 }
+
