@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.routes.js"
 import userRoutes from "./routes/user.routes.js"
 import patientRoutes from "./routes/patientinfo.routes.js"
 import patientinfoRoutes from "./routes/patientinfo.routes.js";
+import homeRoutes from "./routes/home.routes.js"
 import passport from "passport";
 import "./config/passport.js"
 
@@ -35,6 +36,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+app.use("/home",homeRoutes)
 app.use(passport.initialize())
 //console.log(passport._strategies);
 app.use(passport.session())
