@@ -20,7 +20,7 @@ router.get("/google",
 
 router.get("/google/callback",
   passport.authenticate("google", { session: false,
-    failureRedirect:"/login"
+    failureRedirect:`${process.env.FRONTEND_URL}/login`
   }),
   (req, res) => {
     //res.redirect("http://localhost:1550/dashboard.html?token=" + req.user.token);
@@ -29,7 +29,7 @@ router.get("/google/callback",
   //     token: req.user.token,
   //  })
   const token = req.user.token
-  res.redirect(`${process.env.FRONTEND_URL } "/dashboard?token=${token}`)
+  res.redirect(`${process.env.FRONTEND_URL } /dashboard?token=${token}`)
   })
 
 ;

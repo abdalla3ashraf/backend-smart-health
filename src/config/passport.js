@@ -28,28 +28,26 @@ passport.use(new GoogleStrategy({
   
 },
 async (accessToken, refreshToken, profile, done) => {
-  try{
-// const userData = {
-//     fullName: profile.displayName,
-//     emailAddress: profile.emails[0]?.value,
-//     provider: "Google"
-//   };
-  const response = await axios.post(`${DOTNET_API}/Users/social-login`,
+  try {
 
-    {
-      provider: "Google",
-      token: accessToken
-    }
-    
-  );
-console.log("DOTNET RESPONSE:",response.data);
-return done(null,response.data)
+    const response = await axios.post(
+      `${DOTNET_API}/Users/social-login`,
+      {
+        provider: "Google",
+        token: accessToken
+      }
+    );
 
-   }catch(error){
-   console.log("sosial login error",error.response?.data || error.messsage);
+    return done(null, response.data);
+
+  } catch (error) {
+
+    console.log("Google login error",
+      error.response?.data || error.message);
+
     return done(error, null);
-   }
-  
+  }
+
 }));
   
 
