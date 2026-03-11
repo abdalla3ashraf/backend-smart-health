@@ -8,7 +8,7 @@ import axios from "axios";
 //import { response } from "express";
 
 const DOTNET_API = "https://emergency.runasp.net/api";
-console.log("GOOGLE_CLIENT_ID =", process.env.GOOGLE_CLIENT_ID);
+//console.log("GOOGLE_CLIENT_ID =", process.env.GOOGLE_CLIENT_ID);
 // passport.serializeUser((user, done) => {
 //   done(null, user);
 // }); 
