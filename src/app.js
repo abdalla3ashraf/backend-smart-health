@@ -1,5 +1,4 @@
 import express from "express";
-import dotenv  from "dotenv";
 import session from "express-session"
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js"
@@ -11,7 +10,7 @@ import passport from "passport";
 import "./config/passport.js"
 
 console.log("passport file loaded");
-dotenv.config()
+
 
 const app = express()
 

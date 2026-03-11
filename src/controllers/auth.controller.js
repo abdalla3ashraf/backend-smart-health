@@ -285,14 +285,12 @@ export const completeProfile = async (req, res) => {
     const response = await axios.post(
       `${DOTNET_API}/Users/complete-profile`,
       {
-        
-          emailAddress,
-          nationalId,
-          birthDate,
-          gender,
-          city,
-          phoneNumber
-        
+        emailAddress,
+        nationalId,
+        birthDate: new Date(birthDate).toISOString(),
+        gender,
+        city,
+        phoneNumber
       },
       getAuthHeader(req)
     );
@@ -304,7 +302,8 @@ export const completeProfile = async (req, res) => {
     console.log("COMPLETE PROFILE ERROR:", error.response?.data || error.message);
 
     return res.status(500).json({
-      message: "Failed to complete profile"
+      message: "Failed to complete profile",
+      error: error.response?.data
     });
   }
 };

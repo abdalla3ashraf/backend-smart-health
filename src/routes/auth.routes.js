@@ -1,20 +1,3 @@
-// const express = require ('express')
-// const router = express.Router()
-// //const{ register } = require("../controllers/auth.controller")
-// const authController = require('../controllers/auth.controller')
-
-
-
-// router.post("/register",authController.register)
-// router.post('/login',authController.login)
-
-
-
-
-
-// module.exports =router;
-
-
 import express from "express";
 import passport from "passport";
 import { register, login ,completeProfile ,} from "../controllers/auth.controller.js";
@@ -39,12 +22,13 @@ router.get("/google/callback",
   passport.authenticate("google", { session: false}),
   (req, res) => {
     //res.redirect("http://localhost:1550/dashboard.html?token=" + req.user.token);
-    res.json({message: "google login successful",
+     res.json({message: " login success",
       data: req.user,
-      token: req.user.token,
-   })
-   res.redirect(process.env.FRONTEND_URL + "/dashboard.html?token=" + req.user.token)
-  }
+  //     token: req.user.token,
+  //  })
+  // res.redirect(process.env.FRONTEND_URL + "/dashboard.html?token=" + req.user.token)
+  })
+}
 );
 
 /* FACEBOOK */

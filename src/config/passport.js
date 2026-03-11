@@ -1,11 +1,14 @@
+import dotenv  from "dotenv";
+dotenv.config()
+
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as FacebookStrategy } from "passport-facebook";
 import axios from "axios";
-import { response } from "express";
+//import { response } from "express";
 
 const DOTNET_API = "https://emergency.runasp.net/api";
-
+console.log("GOOGLE_CLIENT_ID =", process.env.GOOGLE_CLIENT_ID);
 // passport.serializeUser((user, done) => {
 //   done(null, user);
 // }); 
@@ -39,8 +42,9 @@ async (accessToken, refreshToken, profile, done) => {
     }
     
   );
+console.log("DOTNET RESPONSE:",response.data);
 return done(null,response.data)
-//console.log("DOTNET RESPONSE:",response.data);
+
    }catch(error){
    console.log("sosial login error",error.response?.data || error.messsage);
     return done(error, null);
