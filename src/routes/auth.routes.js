@@ -19,11 +19,12 @@ router.get("/google",
 );
 
 router.get("/google/callback",
-  passport.authenticate("google", { session: false,
-    failureRedirect:`${process.env.FRONTEND_URL}/login`
-  }),
+   passport.authenticate("google", { failureRedirect: "/" }),
+  // passport.authenticate("google", { session: false,
+  //   failureRedirect:`${process.env.FRONTEND_URL}/login`
+  // }),
   (req, res) => {
-    //res.redirect("http://localhost:1550/dashboard.html?token=" + req.user.token);
+    
     //  res.json({message: " login success",
     //   data: req.user,
   //     token: req.user.token,
