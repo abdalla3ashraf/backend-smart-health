@@ -29,7 +29,7 @@ router.get("/google/callback",
   //     token: req.user.token,
   //  })
   const token = req.user.token
-  res.redirect(process.env.FRONTEND_URL + "/dashboard.html?token=" + token)
+  res.redirect(`${process.env.FRONTEND_URL } "/dashboard?token=${token}`)
   })
 
 ;
