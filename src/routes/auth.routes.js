@@ -33,17 +33,18 @@ router.get ("/my-profile",verifyToken,getMyProfile)
 //   res.redirect(`${process.env.FRONTEND_URL } /dashboard?token=${token}`)
 //   })
 // routes/auth.routes.js
-router.get("/google/callback",
-  passport.authenticate("google", { session: false, failureRedirect: `${process.env.FRONTEND_URL}/login` }),
-  (req, res) => {
-    // req.user هنا هو الـ response.data اللي رجع من الـ .NET API
-    const token = req.user.token; // تأكد من اسم الحقل اللي زميلك بيرجعه (token أو accessToken)
+// routes/auth.routes.js
 
-    // لو المشروع ليه ابلكيشن فلاتر، بنستخدم حاجة اسمها Deep Link
-    // لو ويب بس، بنبعته على الـ URL عادي
-    const targetUrl = `${process.env.FRONTEND_URL}/dashboard?token=${token}`;
+router.get("/google/callback",
+  passport.authenticate("google", { 
+    session: false, 
+    failureRedirect: `${process.env.FRONTEND_URL}/login` 
+  }),
+  (req, res) => {
+    const token = req.user.token; // التوكن اللي راجع من الـ .NET
     
-    res.redirect(targetUrl);
+    // شيل المسافة اللي كانت بعد كلمة FRONTEND_URL
+    res.redirect(`${process.env.FRONTEND_URL}/dashboard?token=${token}`);
   }
 );
 

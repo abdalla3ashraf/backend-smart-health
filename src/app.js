@@ -18,7 +18,7 @@ const app = express()
 //     origin: "*"
 // })) 
 // app.js
-import cors from "cors";
+
 
 // ...
 app.use(cors({
