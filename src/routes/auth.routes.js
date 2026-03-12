@@ -35,15 +35,27 @@ router.get ("/my-profile",verifyToken,getMyProfile)
 // routes/auth.routes.js
 // routes/auth.routes.js
 
-router.get("/google/callback",
+/* GOOGLE LOGIN */
+
+router.get("/google", 
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+
+router.get("/google/callback", 
   passport.authenticate("google", { 
     session: false, 
     failureRedirect: `${process.env.FRONTEND_URL}/login` 
   }),
   (req, res) => {
-    const token = req.user.token; // التوكن اللي راجع من الـ .NET
     
-    // شيل المسافة اللي كانت بعد كلمة FRONTEND_URL
+    const token = req.user?.token; 
+    
+    if (!token) {
+        return res.redirect(`${process.env.FRONTEND_URL}/login?error=token_missing`);
+    }
+
+    
     res.redirect(`${process.env.FRONTEND_URL}/dashboard?token=${token}`);
   }
 );
