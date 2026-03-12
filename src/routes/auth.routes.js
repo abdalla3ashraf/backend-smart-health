@@ -41,18 +41,16 @@ router.get("/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-
 router.get("/google/callback", 
   passport.authenticate("google", { 
     session: false, 
     failureRedirect: `${process.env.FRONTEND_URL}/login` 
   }),
   (req, res) => {
-    
     const token = req.user?.token; 
     
     if (!token) {
-        return res.redirect(`${process.env.FRONTEND_URL}/login?error=token_missing`);
+       return res.redirect(`${process.env.FRONTEND_URL}/login?error=no_token`);
     }
 
     
