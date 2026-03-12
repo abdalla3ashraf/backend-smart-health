@@ -14,9 +14,22 @@ console.log("passport file loaded");
 
 const app = express()
 
-app.use (cors({
-    origin: "*"
-})) 
+// app.use (cors({
+//     origin: "*"
+// })) 
+// app.js
+import cors from "cors";
+
+// ...
+app.use(cors({
+  origin: [process.env.FRONTEND_URL, "http://localhost:5502"], // في مابعد حدد دومين الويب ودومين الـ API
+  credentials: true
+}));
+
+// لازم الترتيب ده:
+app.use(express.json());
+app.use(passport.initialize()); 
+// ابعد عن passport.session() لو هتشتغل JWT (وده الأفضل لمشروعكم)
 app.use(express.json())
 
 app.get("/test",(req,res)=>{

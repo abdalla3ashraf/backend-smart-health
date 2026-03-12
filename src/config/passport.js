@@ -19,36 +19,29 @@ const DOTNET_API = "https://emergency.runasp.net/api";
 
 /* ========== GOOGLE ========== */
 
+// config/passport.js
+// ... (البداية زي ما هي)
 passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID, 
-  clientSecret:  process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: `${process.env.BASE_URL}/auth/google/callback`,
-  
-  // scope:["profile","email"]
-  
-},
-async (accessToken, refreshToken, profile, done) => {
-  try {
-
-    const response = await axios.post(
-      `${DOTNET_API}/Users/social-login`,
-      {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: `${process.env.BASE_URL}/auth/google/callback`, // تأكد إن الـ BASE_URL هو لينك فيرسيل
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      // بنبعت التوكن اللي جه من جوجل لزميلك بتاع الـ .NET
+      const response = await axios.post(`${process.env.DOTNET_API}/Users/social-login`, {
         provider: "Google",
-        token: accessToken
-      }
-    );
+        token: accessToken 
+      });
 
-    return done(null, response.data);
-
-  } catch (error) {
-
-    console.log("Google login error",
-      error.response?.data || error.message);
-
-    return done(error, null);
+      // البيانات اللي راجعة من الـ .NET (اللي فيها الـ JWT بتاعكم)
+      return done(null, response.data); 
+    } catch (error) {
+      console.error("Google Login Error:", error.response?.data || error.message);
+      return done(error, null);
+    }
   }
-
-}));
+));
   
 
 
