@@ -47,10 +47,11 @@ router.get("/google/callback",
     failureRedirect: `${process.env.FRONTEND_URL}/login` 
   }),
   (req, res) => {
-    const token = req.user?.token; 
+    console.log("User received from passport:", req.user);
+    const token = req.user.token || req.user.accessToken || req.user.data?.token; 
     
     if (!token) {
-       return res.redirect(`${process.env.FRONTEND_URL}/login?error=no_token`);
+      return res.json({ message: "Token missing from .NET response", receivedData: req.user })
     }
 
     

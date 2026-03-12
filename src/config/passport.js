@@ -34,12 +34,13 @@ async (accessToken, refreshToken, profile, done) => {
       provider: "Google",
       token: accessToken
     });
-
+    console.log("DotNet Response Data:", response.data);
+    
     return done(null, response.data);
 
   } catch (error) {
-    console.error("Full Error Details:", error.response?.data || error.message);
-    return done(error, null);
+    console.error("DotNet API Error:", error.response?.data || error.message);
+    return done(null, false);
   }
 }));
   
