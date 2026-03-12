@@ -51,7 +51,9 @@ router.get("/google/callback",
     const token = req.user.token || req.user.accessToken || req.user.data?.token; 
     
     if (!token) {
-      return res.json({ message: "Token missing from .NET response", receivedData: req.user })
+      return res.json({ status:"Error",
+        message:"الـدوت نت مبعتش توكن يا شباب",
+         receivedData: req.user })
     }
 
     
