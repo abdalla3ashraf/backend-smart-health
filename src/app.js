@@ -19,25 +19,28 @@ const app = express()
 // })) 
 // app.js
 
-// ...
+// ...1
 app.use(cors({
   origin: "*", // في مابعد حدد دومين الويب ودومين الـ API
   credentials: true
 }));
 
-// لازم الترتيب ده:
+//2
 app.use(express.json());
+//3
 app.use(session({
     secret:"supersecretkey",
     resave: false,
     saveUninitialized: false
 }))
+//4
 app.use(passport.initialize()); 
 app.use(passport.session())
 
-
+//5
 app.use("/auth",authRoutes)
 app.use("/user",userRoutes)
+app.use("/home",homeRoutes)
 app.use("/patient",patientRoutes)
 app.use("/api/patientinfo",patientinfoRoutes)
 app.use("/api/patient",patientinfoRoutes)
@@ -52,7 +55,7 @@ app.get("/", (req, res) => {
 });
 
 
-app.use("/home",homeRoutes)
+
 
 //console.log(passport._strategies);
 
